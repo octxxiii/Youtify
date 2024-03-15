@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>HappyHacking</string>
+	<key>CFBundleExecutable</key>
+	<string>HappyHacking</string>
+	<key>CFBundleIconFile</key>
+	<string>generated-e04fa19607f1a95b76687df6a1011dad4b771926ab94f9cb604cd58b0847b2f6.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>HappyHacking</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>HappyHacking</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+</dict>
+</plist>

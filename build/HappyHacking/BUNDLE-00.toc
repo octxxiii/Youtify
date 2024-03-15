@@ -1,0 +1,3 @@
+([('HappyHacking',
+   '/Users/kimminjun/minjun/PyConverter2-1.3/dist/HappyHacking',
+   'EXECUTABLE')],)
