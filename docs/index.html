@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtify - Youtube/Music Converter & Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2D2D2D;
+            --secondary-color: #333333;
+            --accent-color: #555555;
+            --text-color: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2D2D2D 0%, #1a1a1a 100%);
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .download-section {
+            background-color: var(--secondary-color);
+            padding: 50px 0;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+
+        .btn-download {
+            background-color: #FF0000;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #CC0000;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .version-badge {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .update-log {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .update-item {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 mb-4">🎵 Youtify</h1>
+            <p class="lead">Youtube/Music Converter & Player</p>
+            <div class="mt-4">
+                <span class="version-badge">v1.0.0</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container">
+        <h2 class="text-center mb-5">🚀 주요 기능</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-youtube fs-1 mb-3"></i>
+                    <h3>다중 플랫폼 지원</h3>
+                    <p>Youtube, Youtube Music, SoundCloud 등 다양한 플랫폼 지원</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-palette fs-1 mb-3"></i>
+                    <h3>다양한 테마</h3>
+                    <p>다크, 모노카이, 파스텔 등 다양한 테마 제공</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-controller fs-1 mb-3"></i>
+                    <h3>컨트롤 패널</h3>
+                    <p>재생/일시정지/이전/다음 등 기본 컨트롤 제공</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container text-center">
+            <h2 class="mb-4">📥 다운로드</h2>
+            <p class="mb-4">최신 버전: v1.0.0 (2024-04-01)</p>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-download btn-lg w-100 mb-3">
+                        <i class="bi bi-windows me-2"></i>Windows
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-download btn-lg w-100 mb-3">
+                        <i class="bi bi-apple me-2"></i>macOS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Update Log Section -->
+    <section class="container">
+        <h2 class="text-center mb-4">📝 업데이트 내역</h2>
+        <div class="update-log">
+            <div class="update-item">
+                <h5>2025-05-08</h5>
+                <ul>
+                    <li>최소화 버튼 활성화</li>
+                    <li>버튼 사이즈 통일</li>
+                    <li>안내문 최신화</li>
+                </ul>
+            </div>
+            <div class="update-item">
+                <h5>2024-04-08</h5>
+                <ul>
+                    <li>전체 선택 삭제 후 체크 해제 오류 수정</li>
+                    <li>컨트롤 패널 개선</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 mt-5">
+        <p>Creator: OctXXIII</p>
+        <p>Distribution date: 2024-04-01</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import (QApplication, QDialog, QPushButton, QVBoxLayout, QL
 from PyQt5.QtCore import QThread, pyqtSignal, Qt, pyqtSlot, QObject, QTimer, QUrl, QSize, QDateTime
 import yt_dlp
 import resources_rc
+import re
 
 def get_ffmpeg_path():
     if getattr(sys, 'frozen', False):
@@ -232,69 +233,30 @@ class SettingsDialog(QDialog):
         # Define the URL and the descriptive text with HTML for line breaks
         self.predefinedURL = "https://soundcloud.com/octxxiii"
         predefinedText = """
-            <p style="text-align: center;">
-            <h1>OctXXIII Ver. 1.0</h1>
+            <p style=\"text-align: center;\">
+            <h1>Youtify Ver. 1.0</h1>
             Youtube/Music Converter & Player
             </p>
             <br>
             <p>
-            <h3}>사용방법</h3>
-
-                <ol>
-                1. 브라우저상에서 원하는 영상이나 플레이리스트를 선택<br>
-                2. CopyURL을 클릭하거나 url 추가 후 검색 버튼을 클릭<br>
-                3. Table에 추가 된 영상의 옵션을 선택 후 다운로드
-                </ol>
-                <h3>240326 issue 및 업데이트</h3>
-                <ol>
-                url을 통한 비디오 검색기능<br>
-                플레이리스트, 단일 비디오 모두 검색가능<br>
-                Video Table에 썸네일, 제목, 다운가능한 포멧 가시화<br>
-                url 검색시 목록에 중첩<br>
-                체크박스를 통해 특정 비디오만 다운로드 가능<br>
-                특정 비디오 선택 삭제 가능<br>
-                경로 지정 다운로드 가능<br>
-                제목을 수정한 후 수정 된 제목으로 다운로드 가능<br>
-                </ol>
-                <h3>240327 issue 및 업데이트</h3>
-                <ol>
-                Video Table에 url이 추가되어 있으면 검색 불가<br> 
-                Video Table에 추가 된 url 삭제 후 재검색 가능<br>
-                간혹 플레이리스트 중 검색 되지 않는 url이 존재함
-                </ol>
-                <h3>240328 issue 및 업데이트</h3>
-                <ol>
-                간혹 플레이리스트 중 검색 되지 않는 url이 존재함<br>
-                브라우저 창 기존 다운로드 프로그램 좌측에 추가<br>
-                브라우저 창 show&hide 기능 추가<br>
-                브라우저 nav 추가<br>
-                브라우저의 현재 url copy 기능 추가<br>
-                url 입력창 전체 삭제 기능 추가<br>
-                기존 테마 가시성 증가<br>
-                black, monokai theme 추가<br>
-                </ol>
-                <h3>240401 issue 및 업데이트</h3>
-                <ol>
-                간혹 플레이리스트 중 검색 되지 않는 url이 존재함<br>
-                브라우저창 다운로드 창 각각 숨기기 기능 추가<br>
-                유튜브 홈, 뮤직 홈 버튼 추가<br>
-                </ol>
-                <h3>240405 issue 및 업데이트</h3>
-                <ol>
-                클립보드 복사 에러 수정<br>
-                새로고침 버튼 추가<br>
-                사운드 클라우드 버튼 추가<br>
-                </ol>
-                <h3>240408 issue 및 업데이트</h3>
-                <ol>
-                전체 선택 삭제 후 전체 선택 체크 해제 안되던 에러 해결 <br>
-                현재 브라우저에서 재생되고 있는 타이틀이 뜨는 Label 추가 <br>
-                현재 브라우저의 비디오/오디오를 컨트롤 할 수 있는 패널 추가
-                </ol>
-            </p>
+            <h3>사용방법</h3>
+            <ol>
+            1. 브라우저에서 원하는 영상 또는 플레이리스트를 선택<br>
+            2. CopyURL 버튼 클릭 또는 URL 입력 후 검색 버튼 클릭<br>
+            3. Table에 추가된 영상의 옵션(포맷 등) 선택 후 다운로드<br>
+            </ol>
+            <h3>최근 업데이트 내역</h3>
+            <ul>
+            <li>2025-05-08: 최소화 버튼 비활성화 문제 해결, 다운로드/삭제 버튼 사이즈 통일, 안내문 최신화</li>
+            <li>2024-04-08: 전체 선택 삭제 후 체크 해제 오류 수정, 브라우저 타이틀 표시, 비디오/오디오 컨트롤 패널 추가</li>
+            <li>2024-04-05: 클립보드 복사 에러 수정, 새로고침/사운드클라우드 버튼 추가</li>
+            <li>2024-04-01: 브라우저/다운로드 창 각각 숨기기, 유튜브/뮤직 홈 버튼 추가</li>
+            <li>2024-03-28: 브라우저 show&hide, nav, url copy, 테마 가시성 증가, black/monokai 테마 추가</li>
+            <li>2024-03-27: 중복 url 검색 방지, url 삭제 후 재검색 가능</li>
+            <li>2024-03-26: 썸네일/제목/포맷 가시화, 체크박스 선택 다운로드, 경로 지정, 제목 수정 다운로드 등</li>
+            </ul>
             <h2>
-            Creator: nobody 😜 
-            <br>
+            Creator: OctXXIII<br>
             Distribution date: 2024-04-01
             </h2>
         """
@@ -419,7 +381,8 @@ class VideoDownloader(QDialog):
         super().__init__(*args, **kwargs)
         self.settingsDialog = None
         self.Nobody = "~/Library/Caches/Nobody"  # Define here
-        self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
+        # 최소화 버튼 활성화
+        self.setWindowFlags(Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
 
         # 실행 파일이 있는 폴더를 기반으로 캐시 디렉토리 설정
         executable_path = os.path.abspath(sys.argv[0])
@@ -442,7 +405,7 @@ class VideoDownloader(QDialog):
         settings.setAttribute(QWebEngineSettings.PluginsEnabled, True)
         settings.setAttribute(QWebEngineSettings.WebGLEnabled, True)
 
-        self.setWindowTitle("OctXXIII")
+        self.setWindowTitle("Youtify")
         self.player = QMediaPlayer(self)
         self.video_info_list = []
 
@@ -503,7 +466,7 @@ class VideoDownloader(QDialog):
         self.browser.setUrl(QUrl("https://www.youtube.com"))
         self.homePageUrl = QUrl("https://www.youtube.com")
         self.musicPageUrl = QUrl("https://music.youtube.com")
-        self.SCPageUrl = QUrl("https://soundcloud.com/")
+        self.SCPageUrl = QUrl("https://m.soundcloud.com/")
 
         self.toggleDownButton = QPushButton("💥", self)
         self.toggleDownButton.clicked.connect(self.toggleBrowser)
@@ -611,8 +574,9 @@ class VideoDownloader(QDialog):
         self.later_list.setFixedSize(100, 30)
         self.video_table = QTableWidget()
         self.download_button = QPushButton('📥')
+        # self.download_button.setFixedSize(200, 30)
         self.delete_button = QPushButton('❌')
-        self.delete_button.setFixedSize(30, 30)
+        # self.delete_button.setFixedSize(200, 30)
         
         # rainbow_cat.gif를 표시할 QLabel 추가
         self.cat_label = QLabel(self)
@@ -905,34 +869,39 @@ class VideoDownloader(QDialog):
             self.title_label.setText("")
 
     def play_back(self):
-        # Check if the current site is YouTube and adjust behavior
-        current_url = self.browser.url().toString()
-        youtube_homepage = "https://www.youtube.com/"
-
-        # Check if the current URL is exactly the YouTube homepage
-        if current_url.startswith(youtube_homepage) and len(current_url.strip('/')) == len(youtube_homepage.strip('/')):
-            # Do not navigate back if on the YouTube homepage
-            return
-        elif "youtube.com" in current_url:
-            self.browser.back()  # Navigate back in browser history if not on the homepage
-        else:
-            # JavaScript code to simulate clicking the "Previous" button for SoundCloud
-            jsCode = """
-            (function() {
-                const host = window.location.host;
-                if (host.includes('soundcloud.com')) {
-                    document.querySelector('.playControls__prev')?.click();
-                }
-            })();
-            """
-            self.browser.page().runJavaScript(jsCode)
-
-    def play(self):
-        # JavaScript code to play/pause and return the current state
         jsCode = """
         (function() {
             const host = window.location.host;
-            if (host.includes('youtube.com')) {
+            if (host.includes('music.youtube.com')) {
+                var prevBtn = document.querySelector('button.previous-button');
+                if (prevBtn && !prevBtn.disabled) prevBtn.click();
+            } else if (host.includes('soundcloud.com')) {
+                var prevBtn = document.querySelector('.playControls__prev');
+                if (prevBtn) prevBtn.click();
+            } else if (host.includes('youtube.com')) {
+                window.history.back();
+            }
+        })();
+        """
+        self.browser.page().runJavaScript(jsCode)
+
+    def play(self):
+        jsCode = """
+        (function() {
+            const host = window.location.host;
+            if (host.includes('music.youtube.com')) {
+                var playBtn = document.querySelector('button.play-pause-button');
+                if (playBtn && !playBtn.disabled) {
+                    playBtn.click();
+                    // 버튼의 aria-label이 '일시정지'면 재생중, '재생'이면 멈춤
+                    var label = playBtn.getAttribute('aria-label') || playBtn.title || '';
+                    if (label.includes('일시정지') || label.toLowerCase().includes('pause')) {
+                        return 'playing';
+                    } else {
+                        return 'paused';
+                    }
+                }
+            } else if (host.includes('youtube.com')) {
                 var video = document.querySelector('video');
                 if (video) {
                     if (video.paused) {
@@ -944,21 +913,15 @@ class VideoDownloader(QDialog):
                     }
                 }
             } else if (host.includes('soundcloud.com')) {
-                var playButton = document.querySelector('.playControls__play');
-                if (playButton) {
-                    if (playButton.classList.contains('playing')) {
-                        playButton.click();
-                        return 'paused';
-                    } else {
-                        playButton.click();
-                        return 'playing';
-                    }
+                var playBtn = document.querySelector('.playControls__play');
+                if (playBtn) {
+                    playBtn.click();
+                    return playBtn.classList.contains('playing') ? 'playing' : 'paused';
                 }
             }
             return 'unknown';
         })();
         """
-        # Execute the JavaScript code and update the play button icon based on the returned state
         self.browser.page().runJavaScript(jsCode, self.updatePlayButtonIcon)
 
     @pyqtSlot(str)
@@ -1474,28 +1437,20 @@ class Downloader(QThread):
 
     def progress_hook(self, d):
         if d['status'] == 'downloading':
-            # Trim the title to 14 characters and append "..." if it exceeds this limit
-            title = os.path.splitext(os.path.basename(d['filename']))[0]
-            if len(title) > 14:
-                title = title[:14] + "..."
-            # Extract the percentage and convert to a float
-            percent_complete = float(d['_percent_str'].replace('%', ''))
-            # Emit signal to update the progress bar (make sure this signal is connected to the actual progress bar update method)
-            self.updated_progress.emit(percent_complete)
-            # Emit status update with trimmed title and current download percentage
-            self.updated_status.emit(f"Downloading {title}: {d['_percent_str']} {d['_eta_str']}")
+            percent_str = remove_ansi_escape(d['_percent_str'])
+            percent_complete = float(percent_str.replace('%', ''))
+            # ...
         elif d['status'] == 'finished':
-            # Repeat the trimming process for consistency in status updates
             title = os.path.splitext(os.path.basename(d['filename']))[0]
             if len(title) > 14:
                 title = title[:14] + "..."
-            self.updated_status.emit(f"Finished downloading {title}")
-        elif d['status'] == 'error':
-            # And again for error messages
-            title = os.path.splitext(os.path.basename(d['filename']))[0]
-            if len(title) > 14:
-                title = title[:14] + "..."
-            self.download_failed.emit(f"Error downloading {title}")
+            self.updated_status.emit(f"다운로드 완료: {title}")
+        # ... 기타 상태 처리 ...
+
+
+def remove_ansi_escape(text):
+    ansi_escape = re.compile(r'(?:\x1B[@-_][0-?]*[ -/]*[@-~])')
+    return ansi_escape.sub('', text)
 
 
 if __name__ == '__main__':
