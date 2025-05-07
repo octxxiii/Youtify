@@ -33,17 +33,20 @@ jobs:
         pip install pyinstaller
         pip install -r requirements.txt
     
-    - name: Download and setup FFmpeg
+    - name: Download and setup FFmpeg (Windows)
+      if: matrix.os == 'windows-latest'
+      shell: pwsh
       run: |
-        if [ "${{ matrix.os }}" = "windows-latest" ]; then
-          curl -L ${{ matrix.ffmpeg_url }} -o ffmpeg.zip
-          7z x ffmpeg.zip
-          mv ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe .
-        else
-          curl -L ${{ matrix.ffmpeg_url }} -o ffmpeg.zip
-          unzip ffmpeg.zip
-          chmod +x ffmpeg
-        fi
+        Invoke-WebRequest -Uri ${{ matrix.ffmpeg_url }} -OutFile ffmpeg.zip
+        Expand-Archive -Path ffmpeg.zip -DestinationPath .
+        Move-Item -Path "ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe" -Destination .
+    
+    - name: Download and setup FFmpeg (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        curl -L ${{ matrix.ffmpeg_url }} -o ffmpeg.zip
+        unzip ffmpeg.zip
+        chmod +x ffmpeg
     
     - name: Build executable
       run: python build.py
