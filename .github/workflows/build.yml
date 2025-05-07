@@ -34,8 +34,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Nobody3-Windows
-          path: dist/Nobody3/Nobody3.exe
+          name: Youtify-Windows
+          path: dist/Youtify/Youtify.exe
 
   build-macos:
     runs-on: macos-latest
@@ -63,5 +63,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Nobody3-macOS
-          path: dist/Nobody3/Nobody3.app 
+          name: Youtify-macOS
+          path: dist/Youtify/Youtify.app 
