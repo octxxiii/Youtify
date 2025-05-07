@@ -129,10 +129,9 @@
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'primaryColor': '#2d2d2d', 'edgeLabelBackground':'#fff'}}}%%
 graph LR
-    title[다운로드/검색 속도 (10곡 기준, M1 Mac)]
-    Youtify[Youtify] --> 72
-    ytdlp[yt-dlp CLI] --> 70
-    other[경쟁 GUI 툴] --> 150
+    A[Youtify] --> B[72초]
+    C[yt-dlp CLI] --> D[70초]
+    E[경쟁 GUI 툴] --> F[150초]
 ```
 
 - **Youtify**는 yt-dlp 최신 엔진을 활용하여 CLI 수준의 다운로드 속도를 제공합니다.
