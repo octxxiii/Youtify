@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file alias="homeIcon">resources/Antu_youtube-dl.svg.png</file>
+    <file alias="musicIcon">resources/Youtube_Music_icon.svg.png</file>
+    <file alias="soundCloudIcon">resources/Soundcloud.512.png</file>
+    <!-- 기타 리소스 파일 추가 -->
+</qresource>
+</RCC>

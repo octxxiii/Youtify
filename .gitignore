@@ -1,0 +1,21 @@
+# Virtual Environment
+venv/
+venv311/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Build files
+dist/
+build/
+*.spec
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+download_log.txt 
