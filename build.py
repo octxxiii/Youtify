@@ -2,8 +2,13 @@ import os
 import platform
 import shutil
 import subprocess
+import sys
 
 def build_executable():
+    # Windows에서 한글 출력을 위한 인코딩 설정
+    if platform.system() == 'Windows':
+        sys.stdout.reconfigure(encoding='utf-8')
+    
     system = platform.system()
     
     # 운영체제 확인
